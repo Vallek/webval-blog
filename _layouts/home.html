@@ -1,0 +1,67 @@
+---
+layout: default-home
+---
+
+<div class="home">
+  {%- if page.title -%}
+  <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}
+  
+  {{ content }}
+  
+  
+  <!-- This loops through the paginated posts -->
+  {% for post in paginator.posts %}
+  <ul class="post-list">
+    <li class="post-preview">
+      {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+      <span class="post-meta">{{ post.date | date: date_format }}</span>
+      <a class="post-link" href="{{ post.url | relative_url }}">
+      <h2 class="post-preview-title">
+        {{ post.title | escape }}
+      </h2>
+      {%- if post.thumbnail != null -%}
+      <img class="post-feature-image" src="{{ post.thumbnail }}" alt="">
+      {%- endif -%}
+    </a>
+    <a class="post-excerpt-link" href="{{ post.url | relative_url }}">
+      <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords:30 }}</p>
+    </a>
+    {%- if site.show_excerpts -%}
+    {{ post.excerpt }}
+    {%- endif -%}
+  </li>
+</ul>
+{% endfor %}
+
+{% if paginator.total_pages > 1 %}
+<div class="pagination">
+  {% if paginator.previous_page %}
+  <a href="{{ paginator.previous_page_path | relative_url }}">
+      &laquo; Посты новее
+    </a>
+    {% endif %}
+    
+  {% for page in (1..paginator.total_pages) %}
+  {% if page == paginator.page %}
+  <em>{{ page }}</em>
+  {% elsif page == 1 %}
+  <a href="{{ paginator.previous_page_path | relative_url }}">
+    {{ page }}
+  </a>
+  {% else %}
+  <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}">
+    {{ page }}
+  </a>
+  {% endif %}
+  {% endfor %}
+  
+  {% if paginator.next_page %}
+  <a href="{{ paginator.next_page_path | relative_url }}">
+    Посты старше &raquo;
+  </a>
+  {% endif %}
+</div>
+{% endif %}
+
+</div>
