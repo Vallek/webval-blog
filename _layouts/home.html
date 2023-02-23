@@ -25,7 +25,7 @@ layout: default-home
       {%- endif -%}
     </a>
     <a class="post-excerpt-link" href="{{ post.url | relative_url }}">
-      <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords:30 }}</p>
+      <p class="post-excerpt">{{ post.excerpt | strip_html }}</p>
     </a>
     {%- if site.show_excerpts -%}
     {{ post.excerpt }}
