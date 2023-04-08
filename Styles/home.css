@@ -1,0 +1,39 @@
+/* All tags aside */
+.header-wrapper {
+	max-width: calc(1130px - (30px * 2)) !important;
+}
+
+.page-content {
+	display: flex;
+	justify-content: right;
+	flex-wrap: wrap;
+	align-items: flex-start;
+}
+
+.main-wrapper {
+	margin-right: 0 !important;
+}
+
+.all-tags {
+	max-width: 300px;
+	margin-right: auto;
+	position: sticky;
+	top: 30px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px;
+	padding: 15px;
+}
+
+.header-wrapper {
+	max-width: calc(1100px - (30px * 2));
+}
+
+@media screen and (max-width: 1150px) {
+	.main-wrapper {
+		margin-right: auto !important;
+	}
+	.all-tags {
+		margin-left: auto;
+	}
+}
