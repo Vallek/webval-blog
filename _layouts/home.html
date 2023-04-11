@@ -21,7 +21,7 @@ layout: default-home
         {{ post.title | escape }}
       </h2>
       {%- if post.thumbnail != null -%}
-      <img class="post-feature-image" src="{{ post.thumbnail }}" alt="">
+      <img class="post-feature-image" src="{{ post.thumbnail | relative_url }}" alt="">
       {%- endif -%}
     </a>
     <a class="post-excerpt-link" href="{{ post.url | relative_url }}">
