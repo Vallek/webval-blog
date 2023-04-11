@@ -4,7 +4,7 @@ layout: post
 tags: [css, веб_дизайн, tricks]
 thumbnail: /Images/w_QTE8rloTnmwE7OT0bbuw.png
 ---
-![надпись css-трюки](/Images/w_QTE8rloTnmwE7OT0bbuw.png)
+![надпись css-трюки]({{site.baseurl}}/Images/w_QTE8rloTnmwE7OT0bbuw.png)
 
 Привет, сегодня будет первый пост про HTML/CSS верстку, веб-дизайн и вот это всё.
 

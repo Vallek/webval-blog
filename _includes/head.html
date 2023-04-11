@@ -8,9 +8,9 @@
   {%- if page.title == null -%}
   <title>{{ site.title }}</title>
   {%- endif -%}
-  <link rel="stylesheet" href="{{ 'assets/main.css' | relative_url }}">
-  <link rel="stylesheet" href="{{ 'Styles/my-styles.css' | relative_url }}">
-  <link rel="icon" sizes="16x16" href="{{ 'Icons/favicon.ico' | relative_url }}">
-  <link rel="icon" sizes="32x32" href="{{ 'Icons/favicon.ico' | relative_url }}">
+  <link rel="stylesheet" href="{{site.baseurl}}/assets/main.css">
+  <link rel="stylesheet" href="{{site.baseurl}}/Styles/my-styles.css">
+  <link rel="icon" sizes="16x16" href="{{site.baseurl}}/Icons/favicon.ico">
+  <link rel="icon" sizes="32x32" href="{{site.baseurl}}/Icons/favicon.ico">
   {%- feed_meta -%}
 </head>
