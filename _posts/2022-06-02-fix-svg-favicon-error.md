@@ -30,3 +30,5 @@ thumbnail:
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22%20%3E%3Ctext%20y=%22.9em%22%20font-size=%2290%22%20%3E✊%3C/text%20%3E%3C/svg%20%3E">
 ```
 ![скриншот валидатора без ошибки]({{site.baseurl}}/Images/fav-2.png)
+
+upd! Кто-то запилил [онлайн инструмент](https://fav.farm/) с короткой ссылкой для link, у которой нет этой проблемы.
