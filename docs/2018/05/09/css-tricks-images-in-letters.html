@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>CSS-трюки: Несколько изображений внутри букв без фотошопа - Борьба с дизайном</title><link rel="stylesheet" href="/webval-blog/assets/main.css">
+  <link rel="stylesheet" href="/webval-blog/Styles/my-styles.css">
+  <link rel="icon" sizes="16x16" href="/webval-blog/Icons/favicon.ico">
+  <link rel="icon" sizes="32x32" href="/webval-blog/Icons/favicon.ico"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/webval-blog/feed.xml" title="Борьба с дизайном" /></head>
+<body><header class="site-header">
+
+  <div class="wrapper header-wrapper"><a class="site-title" rel="author" href="/webval-blog/">Борьба с дизайном</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+            <a class="page-link" href="/webval-blog/about/index.html">Обо мне</a>
+        </div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper main-wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">CSS-трюки: Несколько изображений внутри букв без фотошопа</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-05-09T00:00:00+03:00" itemprop="datePublished">May 9, 2018
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><img src="/webval-blog/Images/w_QTE8rloTnmwE7OT0bbuw.png" alt="надпись css-трюки" /></p>
+
+<p>Привет, сегодня будет первый пост про HTML/CSS верстку, веб-дизайн и вот это всё.</p>
+
+<p>Я тут пытался сделать аналог Clipping Mask из фотошопа только в живой верстке. То есть чтобы буквы заполнились изображением, а за их границами оно исчезло. Это не так сложно сделать с помощью “экспериментального” значения свойства background-clip: text; (поддерживается в современных браузерах, почти везде с префиксом -webkit , в лисе просто так). Но просто это только, если использовать одно изображение. А что, если вы хотите несколько? Конечно, можно составить background-image из нескольких картинок, но в этом случае вы лишаетесь определенной гибкости. Например, выравнивания каждого фото с помощью background-position. Если же составлять фон из div’ов, то тогда вы лишаетесь возможности обтравить его текстом… или нет?</p>
+
+<p>Кому не терпится, можно сразу посмотреть результат на <a href="https://jsfiddle.net/Vallek/eobLc7zf/">Jsfiddle</a>.
+<script async="" src="//jsfiddle.net/Vallek/eobLc7zf/embed/html,css,result/"></script></p>
+
+<p>Мне удалось добиться желаемого эффекта вроде бы без особых хаков (не считая того самого background-clip: text;). Суть такова. В каждый div с фоном вкладывается надпись (в примере через span). Блокам присваиваем background-clip: text; , сам текст должен быть прозрачный. Ширину блоков задаем в процентах в зависимости от их количества, чтобы в сумме вышло 100%. Если их 4, то по 25%. Теперь самое главное: каждую надпись, начиная со второй, мы сдвигаем влево с помощью отрицательной margin-left в процентах. Второму блоку задаем значение -100%, третьему -200% и так далее. Суть в том, что отступы в процентах высчитываются от размера родительского блока, а не самого элемента. Таким образом 0.25 умножаются на 1 и получается та же ширина блока. Соответственно каждый следующий блок надо сдвигать на расстояние в 2 раза больше. Размер шрифта можно подбирать на глаз в vw единицах, чтобы надпись влезла и при этом заняла необходимую ширину. В итоге все это не только собирается в единую, будто бы бесшовную, надпись, но и автоматически масштабируется. Чтобы выровнять картинки по горизонтальному центру задайте background-position: 50%;. Не забудьте задать блокам overflow: hidden;.</p>
+
+<p>В чем смысл:</p>
+
+<ol>
+  <li>Ну, во-первых это красиво:) Плюс я учусь чему-то новому.</li>
+  <li>Вы можете выравнивать каждое изображение независимо от других. В примере выше у первой картинки background-position не 50%, а 20%, чтобы был виден сюжетно важный объект. К другим параметрам вроде масштаба это, конечно, тоже относится.</li>
+  <li>Можно заменять картинки на лету без фотошопа.</li>
+</ol>
+
+<p>С какими проблемами я столкнулся:</p>
+
+<ol>
+  <li>В лисе могут возникнуть проблемы с выделением текста (в хроме вроде нет). Так как использовать этот прием есть смысл только в декоративных целях можно выключить выделение через user-select: none; (работает только с префиксами). Для доступности можно присвоить контейнеру роль role=”presentation”.</li>
+  <li>Чтобы избавиться от ненужного переноса слов используйте white-space: nowrap;.</li>
+  <li>Использовать тут простой одноцветный фон я особо смысла не вижу, но с background-color никаких проблем быть не должно. А вот с градиентами они есть. Точнее они появляются, если использовать на id универсальное свойство background, которое начинает конфликтовать с классом. Поэтому нужно задавать для id полный список значений общего блока. Это будет выглядеть как-то так: background: 50% no-repeat linear-gradient(to right, red , yellow) text;.</li>
+  <li>Ну и для браузеров без поддержки значения text, можно убрать прозрачность с надписи (не забудьте выбрать подходящий цвет).</li>
+</ol>
+
+<p>PS Я не утверждаю, что я первый, кто до такого додумался. Но в ходе гугления решения, ничего не нашел.</p>
+
+    <aside class="categories-sidebar">
+      <!-- <h2 class="aside-heading">Другие статьи по теме:</h2>
+      
+      <h3>css</h3>
+      
+      
+      
+      <ul>
+        <li><a href="/2023/02/22/css-nesting.html">Почему я не использую CSS nesting и вам не советую</a></li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      <ul>
+        <li><a href="/2021/06/14/reduce-motion-problem.html">Проблема с системной настройкой reduced motion</a></li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      <ul>
+        <li><a href="/2020/05/07/layout-translation.html">Layout по-русски</a></li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      <ul>
+        <li><a href="/2018/08/26/vs-code-syntax-highlight.html">Как изменить цвета подсветки синтаксиса в VS Code</a></li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3>веб_дизайн</h3>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <ul>
+        <li><a href="/2018/08/26/vs-code-syntax-highlight.html">Как изменить цвета подсветки синтаксиса в VS Code</a></li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3>tricks</h3>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <ul>
+        <li><a href="/2018/06/01/chrom-abber-ph-mask.html">Фотошоп-трюки: хроматическая аберрация и маска границ</a></li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+       -->
+
+      <h2 class="aside-heading">Тэги:</h2>
+      <span>
+        
+          
+          <a class="tag-link" href="/webval-blog/tag/css"><nobr>css</nobr></a>
+        
+          
+          <a class="tag-link" href="/webval-blog/tag/веб_дизайн"><nobr>веб_дизайн</nobr></a>
+        
+          
+          <a class="tag-link" href="/webval-blog/tag/tricks"><nobr>tricks</nobr></a>
+        
+      </span>
+    </aside>
+  </div>
+
+  <a class="u-url" href="/webval-blog/2018/05/09/css-tricks-images-in-letters.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <a class="u-url" href="/webval-blog/"></a>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-3 footer-info">
+        <ul class="contact-list">
+          <li>Почта: <a class="u-email" href="mailto:vwebdis@gmail.com">vwebdis@gmail.com</a></li>
+          <li>Собрано на <a href="https://jekyllrb.com/">Jekyll</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

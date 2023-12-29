@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Проблема с системной настройкой reduced motion - Борьба с дизайном</title><link rel="stylesheet" href="/webval-blog/assets/main.css">
+  <link rel="stylesheet" href="/webval-blog/Styles/my-styles.css">
+  <link rel="icon" sizes="16x16" href="/webval-blog/Icons/favicon.ico">
+  <link rel="icon" sizes="32x32" href="/webval-blog/Icons/favicon.ico"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/webval-blog/feed.xml" title="Борьба с дизайном" /></head>
+<body><header class="site-header">
+
+  <div class="wrapper header-wrapper"><a class="site-title" rel="author" href="/webval-blog/">Борьба с дизайном</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+            <a class="page-link" href="/webval-blog/about/index.html">Обо мне</a>
+        </div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper main-wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Проблема с системной настройкой reduced motion</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-06-14T00:00:00+03:00" itemprop="datePublished">Jun 14, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>С недавних пор верстальщики могут учитывать системную настройку пользователей уменьшения движений (reduced motion) при использовании css анимаций. Эта настройка говорит сайтам, что юзер предпочитает отсутствие лишних движений на экране. Прежде всего речь идет об анимациях.</p>
+
+<p>Вообще эта настройка помогает доступности. Есть люди, которым физически плохо от мельтешения на экране. Они отключают анимации в операционной системе, а авторы сайтов с помощью спец. правила <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion">prefers-reduced-motion</a> могут отключить все анимации таким юзерам.</p>
+
+<p>И это замечательно, но есть одна проблема.</p>
+
+<p>Дело в том, что есть другие причины, по которым юзеры используют эту настройку. Самая очевидная - кому-то просто не нравятся анимации в системе. Я один из таких пользователей. Меня раздражают анимации Windows, многие из которых только мешают и замедляют рабочий процесс. Тоже касается и анимаций интерфейса программ. Например браузеров.</p>
+
+<p>Но это вовсе не значит, что я не хочу видеть анимации на сайтах. Не говоря уже о том, что мне как верстальщику, код-ревьюеру и преподавателю просто необходимо их видеть. И вот тут-то и начинаются проблемы. Потому что нельзя просто так взять и отключить только системные анимации. Я не могу сказать “выключи анимации ОС, но продолжай показывать анимации в браузере.” Можно отключить большую часть анимации интерфейса браузера. Но только малую часть анимаций в Windows 10, не включая reduced motion.</p>
+
+<p>Вы можете указать браузерам, чтобы они игнорировали настройку. Например в Firefox за это отвечает ключ ui.prefersReducedMotion в about:config. Но это не даст желаемого результата при отключенной опции в системе.</p>
+
+<p>Это конечно вина не авторов спецификации CSS и браузеров, а недосмотр дизайнеров Windows 10. Я <a href="https://www.tpgi.com/short-note-on-prefers-reduced-motion-and-puzzled-windows-users/">не первый, кто обратил внимание</a> на эту проблему. Но идеального решения на момент описания я не знаю.</p>
+
+    <aside class="categories-sidebar">
+      <!-- <h2 class="aside-heading">Другие статьи по теме:</h2>
+      
+      <h3>веб</h3>
+      
+      
+      
+      <ul>
+        <li><a href="/2023/02/22/css-nesting.html">Почему я не использую CSS nesting и вам не советую</a></li>
+      </ul>
+      
+      
+      
+      
+      
+      <ul>
+        <li><a href="/2022/06/02/fix-svg-favicon-error.html">Как исправить ошибку валидатора для инлайновой svg фавиконки с эмоджи</a></li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3>css</h3>
+      
+      
+      
+      <ul>
+        <li><a href="/2023/02/22/css-nesting.html">Почему я не использую CSS nesting и вам не советую</a></li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <ul>
+        <li><a href="/2020/05/07/layout-translation.html">Layout по-русски</a></li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      <ul>
+        <li><a href="/2018/08/26/vs-code-syntax-highlight.html">Как изменить цвета подсветки синтаксиса в VS Code</a></li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <ul>
+        <li><a href="/2018/05/09/css-tricks-images-in-letters.html">CSS-трюки: Несколько изображений внутри букв без фотошопа</a></li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3>анимация</h3>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3>доступность</h3>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3>windows</h3>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+       -->
+
+      <h2 class="aside-heading">Тэги:</h2>
+      <span>
+        
+          
+          <a class="tag-link" href="/webval-blog/tag/веб"><nobr>веб</nobr></a>
+        
+          
+          <a class="tag-link" href="/webval-blog/tag/css"><nobr>css</nobr></a>
+        
+          
+          <a class="tag-link" href="/webval-blog/tag/анимация"><nobr>анимация</nobr></a>
+        
+          
+          <a class="tag-link" href="/webval-blog/tag/доступность"><nobr>доступность</nobr></a>
+        
+          
+          <a class="tag-link" href="/webval-blog/tag/windows"><nobr>windows</nobr></a>
+        
+      </span>
+    </aside>
+  </div>
+
+  <a class="u-url" href="/webval-blog/2021/06/14/reduce-motion-problem.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <a class="u-url" href="/webval-blog/"></a>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-3 footer-info">
+        <ul class="contact-list">
+          <li>Почта: <a class="u-email" href="mailto:vwebdis@gmail.com">vwebdis@gmail.com</a></li>
+          <li>Собрано на <a href="https://jekyllrb.com/">Jekyll</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

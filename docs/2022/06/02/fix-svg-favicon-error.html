@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Как исправить ошибку валидатора для инлайновой svg фавиконки с эмоджи - Борьба с дизайном</title><link rel="stylesheet" href="/webval-blog/assets/main.css">
+  <link rel="stylesheet" href="/webval-blog/Styles/my-styles.css">
+  <link rel="icon" sizes="16x16" href="/webval-blog/Icons/favicon.ico">
+  <link rel="icon" sizes="32x32" href="/webval-blog/Icons/favicon.ico"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/webval-blog/feed.xml" title="Борьба с дизайном" /></head>
+<body><header class="site-header">
+
+  <div class="wrapper header-wrapper"><a class="site-title" rel="author" href="/webval-blog/">Борьба с дизайном</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+            <a class="page-link" href="/webval-blog/about/index.html">Обо мне</a>
+        </div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper main-wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Как исправить ошибку валидатора для инлайновой svg фавиконки с эмоджи</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-06-02T00:00:00+03:00" itemprop="datePublished">Jun 2, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>В своей <a href="https://vallek.github.io/web-links/index.html">подборке материалов</a> для фронтендеров я изначально использовал инлайновый подход для разных ресурсов, например стилей. Просто, чтобы было проще поделиться всем одним файлом. И хотя с тех пор дизайн и структура проекта усложнились, подход я пока не поменял. К фавиконке я подошел таким же образом. А именно заинлайнил ее прямо в элемент link)</p>
+
+<p>Тут сразу хочется отметить, особенно для новичков, что это не лучшая практика. Такие вещи лучше подключать отдельно. Кроме того для оптимального отображения на разных устройствах лучше использовать разные форматы и размеры. Подробнее об истории вопроса можно почитать в <a href="https://htmlacademy.ru/blog/articles/short-18">статье</a> от HTML Академии.</p>
+
+<p>Так или иначе я себе поставил такую задачу. И решение нашлось довольно быстро - это так называемые <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs">data url</a>. Вы можете поставить в начале значения аттрибута href приставку data: с нужным типом данных и вставить эти самые данные прямо вместо ссылки. В моем случае это выглядело так:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;✊&lt;/text&gt;&lt;/svg&gt;"&gt;
+</code></pre></div></div>
+<p>И это работает! Но, есть одна проблема. Валидатор ругается на недопустимые символы для значения href. В данном случае его можно игнорировать (только если вы на 200% уверены, что именно вы игнорируете), но мне хотелось, чтобы на странице для студентов не было красных ошибок валидации))
+<img src="/webval-blog/Images/fav-1.png" alt="скриншот валидатора с ошибкой" /></p>
+
+<p>Первое, что пришло в голову: просто заменить символы на “спецсимволы”, то есть код, который как раз придуман, чтобы избежать использования недопустимых символов в коде. Такие символы есть в разных вариантах для html, css и т.д. К сожалению валидатор продолжал оценивать результат декодирования и выдавал те же ошибки.</p>
+
+<p>Но, как я не устаю повторять студентам, никогда не стоит останавливаться на первом, самом очевидном, ответе! Поэтому я продолжил копать. А именно погуглил несколько слов из кода и ошибки.
+<img src="/webval-blog/Images/fav-3.png" alt="скриншот гугл запроса" /></p>
+
+<p>Среди результатов первой страницы я наткнулся на похожий вопрос на форуме drupal (это такая CMS на php). И там в похожей строчке я увидел странный спецсимвол.
+<img src="/webval-blog/Images/fav-4.png" alt="скриншот форума с вопросом" /></p>
+
+<p>Это оказалась кодировака url или <a href="https://en.wikipedia.org/wiki/Percent-encoding">Percent-encoding</a>. И мало того, что она декодируется браузерами, ее валидатор уже пропускает. Чтобы ее использовать вам не нужен php. Можно заменить символы вручную. Но проще, конечно, найти <a href="https://www.urlencoder.org/">онлайн инструмент</a>, что я и сделал. И вуаля, инлайновая svg фавиконка с эмоджи, на на которую не ругается валидатор:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22%20%3E%3Ctext%20y=%22.9em%22%20font-size=%2290%22%20%3E✊%3C/text%20%3E%3C/svg%20%3E"&gt;
+</code></pre></div></div>
+<p><img src="/webval-blog/Images/fav-2.png" alt="скриншот валидатора без ошибки" /></p>
+
+<p><strong>upd!</strong> Кто-то запилил <a href="https://fav.farm/">онлайн инструмент</a> с короткой ссылкой для link, у которой нет этой проблемы.</p>
+
+    <aside class="categories-sidebar">
+      <!-- <h2 class="aside-heading">Другие статьи по теме:</h2>
+      
+      <h3>веб</h3>
+      
+      
+      
+      <ul>
+        <li><a href="/2023/02/22/css-nesting.html">Почему я не использую CSS nesting и вам не советую</a></li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <ul>
+        <li><a href="/2021/06/14/reduce-motion-problem.html">Проблема с системной настройкой reduced motion</a></li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3>html</h3>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3>svg</h3>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3>validator</h3>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3>errors</h3>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3>encoding</h3>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3>favicon</h3>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+       -->
+
+      <h2 class="aside-heading">Тэги:</h2>
+      <span>
+        
+          
+          <a class="tag-link" href="/webval-blog/tag/веб"><nobr>веб</nobr></a>
+        
+          
+          <a class="tag-link" href="/webval-blog/tag/html"><nobr>html</nobr></a>
+        
+          
+          <a class="tag-link" href="/webval-blog/tag/svg"><nobr>svg</nobr></a>
+        
+          
+          <a class="tag-link" href="/webval-blog/tag/validator"><nobr>validator</nobr></a>
+        
+          
+          <a class="tag-link" href="/webval-blog/tag/errors"><nobr>errors</nobr></a>
+        
+          
+          <a class="tag-link" href="/webval-blog/tag/encoding"><nobr>encoding</nobr></a>
+        
+          
+          <a class="tag-link" href="/webval-blog/tag/favicon"><nobr>favicon</nobr></a>
+        
+      </span>
+    </aside>
+  </div>
+
+  <a class="u-url" href="/webval-blog/2022/06/02/fix-svg-favicon-error.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <a class="u-url" href="/webval-blog/"></a>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-3 footer-info">
+        <ul class="contact-list">
+          <li>Почта: <a class="u-email" href="mailto:vwebdis@gmail.com">vwebdis@gmail.com</a></li>
+          <li>Собрано на <a href="https://jekyllrb.com/">Jekyll</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
