@@ -36,6 +36,8 @@ GEM
       sass (~> 3.4)
     jekyll-seo-tag (2.7.1)
       jekyll (>= 3.8, < 5.0)
+    jekyll-sitemap (1.4.0)
+      jekyll (>= 3.7, < 5.0)
     jekyll-tagging (1.1.0)
       nuggets
     jekyll-watch (2.2.1)
@@ -78,6 +80,7 @@ DEPENDENCIES
   jekyll-compose
   jekyll-feed (~> 0.6)
   jekyll-paginate
+  jekyll-sitemap
   jekyll-tagging
   minima (~> 2.0)
   tzinfo-data
